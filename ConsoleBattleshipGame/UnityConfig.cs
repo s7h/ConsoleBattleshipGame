@@ -1,4 +1,6 @@
-﻿using Unity;
+﻿using ConsoleBattlefield.ConstraintValidators;
+using ConsoleBattlefield.GameSetup;
+using Unity;
 
 namespace ConsoleBattlefield
 {
@@ -10,6 +12,9 @@ namespace ConsoleBattlefield
             container.RegisterType<BattleshipExecutor>();
 
             //Register all dependencies
+            container.RegisterType<IParseGameConstraints, ParseGameConstraints>();
+            container.RegisterType<IConstraintReader, ConstraintReader>(); 
+            container.RegisterType<IConstraintValidator, ConstraintValidator>();
 
             return container.Resolve<BattleshipExecutor>();
         }

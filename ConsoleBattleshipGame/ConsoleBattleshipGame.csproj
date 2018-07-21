@@ -37,6 +37,10 @@
       <HintPath>..\packages\Unity.5.8.6\lib\net45\CommonServiceLocator.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -75,12 +79,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConstraintValidators\ConstraintValidator.cs" />
+    <Compile Include="ConstraintValidators\IConstraintValidator.cs" />
     <Compile Include="Enum\AlignmentEnum.cs" />
     <Compile Include="GameComponents\Battlefield.cs" />
     <Compile Include="GameComponents\Battleship.cs" />
     <Compile Include="GameComponents\Player.cs" />
     <Compile Include="GameSetup\ConstraintReader.cs" />
     <Compile Include="GameSetup\IConstraintReader.cs" />
+    <Compile Include="GameSetup\IParseGameConstraints.cs" />
+    <Compile Include="GameSetup\ParseGameConstraints.cs" />
     <Compile Include="GameStart.cs" />
     <Compile Include="Models\Alignment.cs" />
     <Compile Include="Models\BattleshipTypes.cs" />
@@ -100,9 +108,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ConstraintValidators\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
