@@ -1,0 +1,14 @@
+{
+    "battleships" : {
+        "carrier" : {"Coordinates" : {"playerOne":"","playerTwo":""}},
+        "battleship" : {"Coordinates" : {"playerOne":"","playerTwo":""}},
+        "crusier" : {"Coordinates" : {"playerOne":"","playerTwo":""}},
+        "submarine": {"Coordinates" : {"playerOne":"","playerTwo":""}},
+        "destroyer" : {"Coordinates" : {"playerOne":"","playerTwo":""}}
+    },
+    "missileCoordinates": {
+        "playerOne" : [],
+        "playerTwo" : []
+    },
+    "numberOfMissiles": 20
+}
