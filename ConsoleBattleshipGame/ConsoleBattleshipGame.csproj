@@ -75,10 +75,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enum\AlignmentEnum.cs" />
     <Compile Include="GameComponents\Battlefield.cs" />
     <Compile Include="GameComponents\Battleship.cs" />
     <Compile Include="GameComponents\Player.cs" />
+    <Compile Include="GameSetup\ConstraintReader.cs" />
+    <Compile Include="GameSetup\IConstraintReader.cs" />
     <Compile Include="GameStart.cs" />
+    <Compile Include="Models\Alignment.cs" />
+    <Compile Include="Models\BattleshipTypes.cs" />
+    <Compile Include="Models\BattleshipType\Battleship.cs" />
+    <Compile Include="Models\BattleshipType\Carrier.cs" />
+    <Compile Include="Models\BattleshipType\Cruiser.cs" />
+    <Compile Include="Models\BattleshipType\Destroyer.cs" />
+    <Compile Include="Models\BattleshipType\Submarine.cs" />
+    <Compile Include="Models\GameConstraint.cs" />
+    <Compile Include="Models\MissileCoordinates.cs" />
+    <Compile Include="Models\ShipCoordinates.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BattleshipExecutor.cs" />
     <Compile Include="UnityConfig.cs" />

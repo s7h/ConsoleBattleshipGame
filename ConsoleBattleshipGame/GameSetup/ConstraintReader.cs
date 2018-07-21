@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleBattlefield
+namespace ConsoleBattlefield.GameSetup
 {
-    public class BattleshipExecutor
+    public class ConstraintReader
     {
-
     }
 }
