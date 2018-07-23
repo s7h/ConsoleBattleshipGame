@@ -87,8 +87,8 @@
     <Compile Include="GameComponents\Player.cs" />
     <Compile Include="GameSetup\ConstraintReader.cs" />
     <Compile Include="GameSetup\IConstraintReader.cs" />
-    <Compile Include="GameSetup\IParseGameConstraints.cs" />
-    <Compile Include="GameSetup\ParseGameConstraints.cs" />
+    <Compile Include="GameSetup\IGameConstraintsParser.cs" />
+    <Compile Include="GameSetup\GameConstraintsParser.cs" />
     <Compile Include="GameStart.cs" />
     <Compile Include="Models\Alignment.cs" />
     <Compile Include="Models\BattleshipTypes.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleBattlefield.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace ConsoleBattlefield.ConstraintValidators
 {
     public interface IConstraintValidator
     {
-        bool ValidateConstraints();
+        bool ValidateConstraints(GameConstraint gameConstraints);
     }
 }

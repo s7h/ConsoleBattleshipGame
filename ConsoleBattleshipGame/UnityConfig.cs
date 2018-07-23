@@ -12,7 +12,7 @@ namespace ConsoleBattlefield
             container.RegisterType<BattleshipExecutor>();
 
             //Register all dependencies
-            container.RegisterType<IParseGameConstraints, ParseGameConstraints>();
+            container.RegisterType<IGameConstraintsParser, GameConstraintsParser>();
             container.RegisterType<IConstraintReader, ConstraintReader>(); 
             container.RegisterType<IConstraintValidator, ConstraintValidator>();
 

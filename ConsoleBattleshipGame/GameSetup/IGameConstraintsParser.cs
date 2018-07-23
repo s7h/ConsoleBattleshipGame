@@ -2,7 +2,7 @@
 
 namespace ConsoleBattlefield.GameSetup
 {
-    public interface IParseGameConstraints
+    public interface IGameConstraintsParser
     {
         GameConstraint ParseContraintsFromGameSetupJson(string filepath);
     }
