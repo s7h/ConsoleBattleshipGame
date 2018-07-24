@@ -5,8 +5,8 @@ namespace ConsoleBattlefield.Models
     [Serializable]
     public class GameConstraint
     {
-        public BattleshipTypes BattleshipTypes { get; set; }
-        public MissileCoordinates MissileCoordinates { get; set; }
-        public int NumberOfMissiles { get; set; }
+        public Ship[] Ships { get; set; }
+        public string[] MissileCoordinates { get; set; }
+        public string PlayerName { get; set; }
     }
 }

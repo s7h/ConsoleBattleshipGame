@@ -1,0 +1,37 @@
+{
+    "ship":
+    [
+        {
+            "type":"cruiser",
+            "xCoordinate":0,
+            "yCoordinate": 0,
+            "alignment" : "Vertical"
+        },
+        {
+            "type":"battleship",
+            "xCoordinate":0,
+            "yCoordinate": 0,
+            "alignment" : "Vertical"
+        },
+        {
+            "type":"destroyer",
+            "xCoordinate":0,
+            "yCoordinate": 0,
+            "alignment" : "Vertical"
+        },
+        {
+            "type":"carrier",
+            "xCoordinate":0,
+            "yCoordinate": 0,
+            "alignment" : "Vertical"
+        },
+        {
+            "type":"submarine",
+            "xCoordinate":0,
+            "yCoordinate": 0,
+            "alignment" : "Vertical"
+        }
+    ],
+    "missileCoordinates" : [],
+    "playerName": "Anonymous"
+}

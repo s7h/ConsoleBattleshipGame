@@ -1,5 +1,6 @@
 ﻿using ConsoleBattlefield.Models;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace ConsoleBattlefield.GameSetup
 {
@@ -12,12 +13,17 @@ namespace ConsoleBattlefield.GameSetup
             this.constraintReader = constraintReader;
         }
 
-        public GameConstraint ParseContraintsFromGameSetupJson(string filepath)
+        public IEnumerable<GameConstraint> ParseContraintsFromGameSetupJson(IEnumerable<string> filepaths)
         {
-            var jsonString = constraintReader.ReadConstraintsFromJSON(filepath);
-            var constraints = JsonConvert.DeserializeObject<GameConstraint>(jsonString);
+            var gameConstraints = new List<GameConstraint>();
 
-            return constraints;
+            foreach (var filepath in filepaths)
+            {
+                var jsonString = constraintReader.ReadConstraintsFromJSON(filepath);
+                var constraints = JsonConvert.DeserializeObject<GameConstraint>(jsonString);
+                gameConstraints.Add(constraints);
+            }
+            return gameConstraints;
         }
     }
 }

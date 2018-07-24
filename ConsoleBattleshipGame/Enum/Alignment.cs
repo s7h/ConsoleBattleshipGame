@@ -2,11 +2,11 @@
 
 namespace ConsoleBattlefield.Enum
 {
-    public enum AlignmentEnum
+    public enum Alignment
     {
         [Description("Align ship vertically")]
-        vertical = 1,
+        Vertical = 1,
         [Description("Align ship horizontally")]
-        horizontal = 2
+        Horizontal = 2
     }
 }

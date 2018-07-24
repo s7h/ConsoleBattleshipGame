@@ -17,11 +17,11 @@ namespace ConsoleBattlefield
             this.gameConstraintsParser = gameConstraintsParser;
         }
 
-        public void SetupAndStartTheGame(string filepath)
+        public void SetupAndStartTheGame(IEnumerable<string> filepaths)
         {
-            var constraints = GetConstraintsFromFilePath(filepath);
-            var playerOne = SetupPlayer(constraints);
-            var playerTwo = SetupPlayer(constraints);
+            var constraints = GetConstraintsFromFilePath(filepaths);
+            var playerOne = SetupPlayer(constraints.ElementAt(0));
+            var playerTwo = SetupPlayer(constraints.ElementAt(1));
 
 
         }
@@ -31,9 +31,9 @@ namespace ConsoleBattlefield
             throw new NotImplementedException();
         }
 
-        private GameConstraint GetConstraintsFromFilePath(string filepath)
+        private IEnumerable<GameConstraint> GetConstraintsFromFilePath(IEnumerable<string> filepaths)
         {
-            return gameConstraintsParser.ParseContraintsFromGameSetupJson(filepath);
+            return gameConstraintsParser.ParseContraintsFromGameSetupJson(filepaths);
         }
     }
 }

@@ -4,7 +4,7 @@ namespace ConsoleBattlefield.Models
 {
     public class Alignment
     {
-        public AlignmentEnum playerOne { get; set; }
-        public AlignmentEnum playerTwo { get; set; }
+        public Alignment playerOne { get; set; }
+        public Alignment playerTwo { get; set; }
     }
 }

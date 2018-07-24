@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ConsoleBattlefield
 {
@@ -8,10 +9,13 @@ namespace ConsoleBattlefield
         {
             var battlefield = UnityConfig.RegisterDependencies();
 
-            Console.WriteLine("Enter path for input JSON");
-            var filepath = Console.ReadLine();
+            Console.WriteLine("Enter game setup JSON file for player One");
+            var playerOneFilepath = Console.ReadLine();
 
-            battlefield.SetupAndStartTheGame(filepath);
+            Console.WriteLine("Enter game setup JSON file for player Two");
+            var playerTwoFilepath = Console.ReadLine();
+
+            battlefield.SetupAndStartTheGame(new List<string> { playerOneFilepath, playerTwoFilepath});
 
             Console.WriteLine("Game Over! Press Any Key to Exit.");
             Console.ReadKey();

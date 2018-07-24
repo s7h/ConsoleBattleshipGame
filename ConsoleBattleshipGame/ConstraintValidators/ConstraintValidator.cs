@@ -2,95 +2,120 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConsoleBattlefield.Models.BattleshipType;
-using ConsoleBattlefield.Enum;
+using ConsoleBattlefield.Exceptions;
 
 namespace ConsoleBattlefield.ConstraintValidators
 {
     public class ConstraintValidator : IConstraintValidator
     {
+        private static string[,] battlefield;
+
+        public ConstraintValidator()
+        {
+            InitializeEmptyBattleField();
+        }
+
         public bool ValidateConstraints(GameConstraint gameConstraints)
         {
-            var validationResult = new List<string>();
-            if (gameConstraints != null)
-            {
-                validationResult.AddRange(ValidateAllShips(gameConstraints.BattleshipTypes));
-                validationResult.AddRange(ValidateMissileCount(gameConstraints.NumberOfMissiles, gameConstraints.MissileCoordinates));
-            }
+            var errorMessages = new List<string>();
 
-            return (validationResult.Count == 0) ? true : false;       
+            errorMessages.AddRange(ValidateMissiles(gameConstraints.MissileCoordinates));
+            errorMessages.AddRange(ValidateShips(gameConstraints.Ships));
+
+            return errorMessages.Any() ? false : true;
         }
 
-        private IList<string> ValidateMissileCount(int numberOfMissiles, MissileCoordinates missileCoordinates)
+        private IEnumerable<string> ValidateShips(Ship[] ships)
         {
             var errorMessages = new List<string>();
-            if (numberOfMissiles == 0)
+            foreach (var ship in ships)
             {
-                errorMessages.Add("Missile count is zero.");
-            }
-            else
-            {
-                if (missileCoordinates.playerOne.Count() != numberOfMissiles)
-                {
-                    errorMessages.Add("Player 1: Number of missiles and number of missile coordinates are not equal.");
-                }
-
-                if (missileCoordinates.playerTwo.Count() != numberOfMissiles)
-                {
-                    errorMessages.Add("Player 2: Number of missiles and number of missile coordinates are not equal.");
-                }
+                errorMessages.AddRange(CanPlaceOnTheBattlefield(ship));
             }
 
             return errorMessages;
         }
 
-        private IList<string> ValidateAllShips(BattleshipTypes battleships)
+        private IEnumerable<string> CanPlaceOnTheBattlefield(Ship ship)
         {
             var errorMessages = new List<string>();
-            if (battleships == null)
+            int shipLength = ship.Size;
+            int posX = ship.XCoordinate;
+            int posY = ship.YCoordinate;
+
+            try
             {
-                errorMessages.Add("No battleships are present.");
+                while (shipLength > 0)
+                {
+                    if (string.Equals(battlefield[posX, posY], Constants.OCEAN))
+                        battlefield[posX, posY] = ship.Avatar;
+                    else
+                        IdentifyShipAtCurrentCoordinateAndThrowError(posX, posY, ship.Avatar);
+
+                    if (ship.Alignment == Enum.Alignment.Vertical)
+                        posY++;
+                    else
+                        posX++;
+
+                    shipLength--;
+                }
             }
-            else
+            catch (IndexOutOfRangeException iorEx)
             {
-                errorMessages.AddRange(ValidateBattleship(battleships.Battleship));
-                errorMessages.AddRange(ValidateCarrier(battleships.Carrier));
-                errorMessages.AddRange(ValidateCruiser(battleships.Cruiser));
-                errorMessages.AddRange(ValidateDestroyer(battleships.Destroyer));
-                errorMessages.AddRange(ValidateSubmarine(battleships.Submarine));
+                errorMessages.Add($"Cannot deploy {ship.Type} outside the range of the battlefield. Try different Coordinate or change the alignment.");
             }
+            catch(ShipOverlappingException soEx)
+            {
+                errorMessages.Add(soEx.Message);
+            }
+
 
             return errorMessages;
         }
 
-        private IEnumerable<string> ValidateSubmarine(Submarine submarine)
+        private void IdentifyShipAtCurrentCoordinateAndThrowError(int posX, int posY, string toBePlaceShipAvatar)
         {
-            throw new NotImplementedException();
+            var existingShipAvatar = battlefield[posX, posY];
+            var existingShipType = GetShipTypeFromAvatar(existingShipAvatar);
+            var toBePlaceShipType = GetShipTypeFromAvatar(toBePlaceShipAvatar);
+            throw new ShipOverlappingException(existingShipType, toBePlaceShipType);
         }
 
-        private IEnumerable<string> ValidateDestroyer(Destroyer destroyer)
+        private string GetShipTypeFromAvatar(string avatar)
         {
-            throw new NotImplementedException();
+            switch (avatar)
+            {
+                case Constants.BATTLESHIP:
+                    return "BATTLESHIP";
+                case Constants.CARRIER:
+                    return "CARRIER";
+                case Constants.CRUISER:
+                    return "CRUISER";
+                case Constants.DESTROYER:
+                    return "DESTROYER";
+                case Constants.SUBMARINE:
+                    return "SUBMARINE";
+            }
+
+            return string.Empty;
         }
 
-        private IEnumerable<string> ValidateCruiser(Cruiser cruiser)
+        private IEnumerable<string> ValidateMissiles(string[] missileCoordinates)
         {
-            throw new NotImplementedException();
+            var errorMessages = new List<string>();
+
+            return errorMessages;
         }
 
-        private IEnumerable<string> ValidateCarrier(Carrier carrier)
+        private void InitializeEmptyBattleField()
         {
-            throw new NotImplementedException();
-        }
-
-        private IEnumerable<string> ValidateBattleship(Battleship battleship)
-        {
-            throw new NotImplementedException();
-        }
-
-        private bool CanPlaceShipOnTheCoordinate(AlignmentEnum align)
-        {
-            return false;
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    battlefield[i, j] = Constants.OCEAN;
+                }
+            }
         }
     }
 }

@@ -79,9 +79,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="ConstraintValidators\ConstraintValidator.cs" />
     <Compile Include="ConstraintValidators\IConstraintValidator.cs" />
-    <Compile Include="Enum\AlignmentEnum.cs" />
+    <Compile Include="Enum\Alignment.cs" />
+    <Compile Include="Enum\BattleshipType.cs" />
+    <Compile Include="Exceptions\ShipOverlappingException.cs" />
     <Compile Include="GameComponents\Battlefield.cs" />
     <Compile Include="GameComponents\Battleship.cs" />
     <Compile Include="GameComponents\Player.cs" />
@@ -99,6 +102,7 @@
     <Compile Include="Models\BattleshipType\Submarine.cs" />
     <Compile Include="Models\GameConstraint.cs" />
     <Compile Include="Models\MissileCoordinates.cs" />
+    <Compile Include="Models\Ship.cs" />
     <Compile Include="Models\ShipCoordinates.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BattleshipExecutor.cs" />
