@@ -18,11 +18,16 @@ namespace ConsoleBattlefield.GameComponents
         private string name;
         private bool isValidPlayer;
 
-        public Player(IConstraintValidator constraintValidator, GameConstraint gameConstraint, string name = "Anonymous Player")
+        public Player(IConstraintValidator constraintValidator, GameConstraint gameConstraint)
         {
             this.constraintValidator = constraintValidator;
+            ValidateConstraint(gameConstraint);
             this.gameConstraint = gameConstraint;
-            this.name = name;
+        }
+
+        private void ValidateConstraint(GameConstraint gameConstraint)
+        {
+            constraintValidator.ValidateConstraints(gameConstraint);
         }
 
         public bool IsValidPlayer

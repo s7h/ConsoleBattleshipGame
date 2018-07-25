@@ -1,4 +1,5 @@
-﻿using ConsoleBattlefield.GameComponents;
+﻿using ConsoleBattlefield.ConstraintValidators;
+using ConsoleBattlefield.GameComponents;
 using ConsoleBattlefield.GameSetup;
 using ConsoleBattlefield.Models;
 using System;
@@ -12,9 +13,12 @@ namespace ConsoleBattlefield
     public class BattleshipExecutor
     {
         private readonly IGameConstraintsParser gameConstraintsParser;
-        public BattleshipExecutor(IGameConstraintsParser gameConstraintsParser)
+        private readonly IConstraintValidator constraintValidator;
+        public BattleshipExecutor(IGameConstraintsParser gameConstraintsParser,
+            IConstraintValidator constraintValidator)
         {
             this.gameConstraintsParser = gameConstraintsParser;
+            this.constraintValidator = constraintValidator;
         }
 
         public void SetupAndStartTheGame(IEnumerable<string> filepaths)
@@ -28,7 +32,7 @@ namespace ConsoleBattlefield
 
         private Player SetupPlayer(GameConstraint constraints)
         {
-            throw new NotImplementedException();
+            return new Player(constraintValidator, constraints);
         }
 
         private IEnumerable<GameConstraint> GetConstraintsFromFilePath(IEnumerable<string> filepaths)

@@ -8,11 +8,16 @@ namespace ConsoleBattlefield
 {
     public class Constants
     {
-        public const string OCEAN = "[~~]";
-        public const string DESTROYER = "[<>]";
-        public const string CRUISER = "[++]";
-        public const string CARRIER = "[><]";
-        public const string SUBMARINE = "[::]";
-        public const string BATTLESHIP = "[##]";
+        public const string OCEAN_AVATAR = "[~~]";
+        public const string DESTROYER_AVATAR = "[<>]";
+        public const string CRUISER_AVATAR = "[++]";
+        public const string CARRIER_AVATAR = "[><]";
+        public const string SUBMARINE_AVATAR = "[::]";
+        public const string BATTLESHIP_AVATAR = "[##]";
+        public const string DESTROYER = "DESTROYER";
+        public const string CRUISER = "CRUISER";
+        public const string CARRIER = "CARRIER";
+        public const string SUBMARINE = "SUBMARINE";
+        public const string BATTLESHIP = "BATTLESHIP";
     }
 }

@@ -15,15 +15,15 @@ namespace ConsoleBattlefield.Models
             switch (Type)
             {
                 case Enum.BattleshipType.Battleship:
-                    return Constants.BATTLESHIP;
+                    return Constants.BATTLESHIP_AVATAR;
                 case Enum.BattleshipType.Carrier:
-                    return Constants.CARRIER;
+                    return Constants.CARRIER_AVATAR;
                 case Enum.BattleshipType.Cruiser:
-                    return Constants.CRUISER;
+                    return Constants.CRUISER_AVATAR;
                 case Enum.BattleshipType.Destroyer:
-                    return Constants.DESTROYER;
+                    return Constants.DESTROYER_AVATAR;
                 case Enum.BattleshipType.Submarine:
-                    return Constants.SUBMARINE;
+                    return Constants.SUBMARINE_AVATAR;
             }
 
             return string.Empty;
