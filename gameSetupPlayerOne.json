@@ -9,7 +9,7 @@
         },
         {
             "type":"battleship",
-            "xCoordinate":0,
+            "xCoordinate":1,
             "yCoordinate":4,
             "alignment" : "Vertical"
         },
@@ -21,8 +21,8 @@
         },
         {
             "type":"carrier",
-            "xCoordinate":0,
-            "yCoordinate":9,
+            "xCoordinate":1,
+            "yCoordinate":8,
             "alignment" : "Vertical"
         },
         {

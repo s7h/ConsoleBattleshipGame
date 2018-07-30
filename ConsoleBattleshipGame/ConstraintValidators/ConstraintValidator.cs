@@ -15,20 +15,14 @@ namespace ConsoleBattlefield.ConstraintValidators
             this.battlefieldSetter = battlefieldSetter;
         }
 
-        public bool ValidateConstraints(GameConstraint gameConstraints)
+        public  IEnumerable<string> ValidateConstraints(GameConstraint gameConstraints)
         {
             var errorMessages = new List<string>();
 
             errorMessages.AddRange(ValidateMissiles(gameConstraints.MissileCoordinates.Split(',')));
             errorMessages.AddRange(ValidateShips(gameConstraints.Ships));
 
-            if (errorMessages.Any())
-            {
-                WriteErrorMessagesToConsole(errorMessages);
-                return false;
-            }
-
-            return true;
+            return errorMessages;
         }
 
         private void WriteErrorMessagesToConsole(List<string> errorMessages)

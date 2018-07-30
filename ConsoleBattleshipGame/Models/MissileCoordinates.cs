@@ -3,7 +3,7 @@ namespace ConsoleBattlefield.Models
 {
     public class MissileCoordinates
     {
-        public string[] playerOne { get; set; }
-        public string[] playerTwo { get; set; }
+        public int PosX { get; set; }
+        public int PosY { get; set; }
     }
 }

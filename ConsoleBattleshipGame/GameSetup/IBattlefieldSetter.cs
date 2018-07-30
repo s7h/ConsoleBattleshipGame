@@ -6,5 +6,6 @@ namespace ConsoleBattlefield.GameSetup
     public interface IBattlefieldSetter
     {
         bool CanPlaceShipsOnTheBattlefield(Ship[] ships, out List<string> errorMessages);
+        string[,] PrepareBattlefield(Ship[] ships);
     }
 }

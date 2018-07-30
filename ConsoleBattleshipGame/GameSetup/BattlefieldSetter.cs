@@ -8,11 +8,6 @@ namespace ConsoleBattlefield.GameSetup
 {
     public class BattlefieldSetter : IBattlefieldSetter
     {
-        public void SetupBattlefieldWithShips()
-        {
-
-        }
-
         public bool CanPlaceShipsOnTheBattlefield(Ship[] ships, out List<string> errorMessages)
         {
             errorMessages = new List<string>();
@@ -66,6 +61,35 @@ namespace ConsoleBattlefield.GameSetup
             return errorMessages.Any() ? false : true;
         }
 
+        public string[,] PrepareBattlefield(Ship[] ships)
+        {
+            var battlefield = InitializeEmptyBattleField();
+
+            foreach (var ship in ships)
+            {
+                int shipLength = ship.Size;
+                int posX = ship.XCoordinate;
+                int posY = ship.YCoordinate;
+
+                while (shipLength > 0)
+                {
+                    if (string.Equals(battlefield[posX, posY], Constants.OCEAN_AVATAR))
+                        battlefield[posX, posY] = ship.Avatar;
+                    else
+                        IdentifyShipAtCurrentCoordinateAndThrowError(battlefield, posX, posY, ship.Avatar);
+
+                    if (ship.Alignment == Enum.Alignment.Vertical)
+                        posX++;
+                    else
+                        posY++;
+
+                    shipLength--;
+                }
+            }
+
+            return battlefield;
+        }
+
         private void IdentifyShipAtCurrentCoordinateAndThrowError(string[,] battlefield, int posX, int posY, string toBePlaceShipAvatar)
         {
             var existingShipAvatar = battlefield[posX, posY];
@@ -97,12 +121,11 @@ namespace ConsoleBattlefield.GameSetup
         private string[,] InitializeEmptyBattleField()
         {
             var battlefield = new string[10, 10];
-
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    battlefield[i, j] = Constants.OCEAN_AVATAR;
+                    battlefield[i, j] =$"{i}{j}";
                 }
             }
 
