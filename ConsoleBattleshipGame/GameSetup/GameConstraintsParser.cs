@@ -23,6 +23,7 @@ namespace ConsoleBattlefield.GameSetup
                 var constraints = JsonConvert.DeserializeObject<GameConstraint>(jsonString);
                 gameConstraints.Add(constraints);
             }
+
             return gameConstraints;
         }
     }

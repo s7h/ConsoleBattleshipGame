@@ -2,6 +2,7 @@
 using ConsoleBattlefield.GameComponents;
 using ConsoleBattlefield.GameSetup;
 using ConsoleBattlefield.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,12 +27,13 @@ namespace ConsoleBattlefield
         public void SetupAndStartTheGame(IEnumerable<string> filepaths)
         {
             var constraints = GetConstraintsFromFilePath(filepaths);
+
             var playerOne = SetupPlayer(constraints.ElementAt(0));
             var playerTwo = SetupPlayer(constraints.ElementAt(1));
 
             if (playerOne.IsValidPlayer && playerTwo.IsValidPlayer)
             {
-                //continue processing
+                //TODO
             }
             else
             {
@@ -55,6 +57,8 @@ namespace ConsoleBattlefield
 
         private void PrintErrors(Dictionary<string, IEnumerable<string>> errorsDict)
         {
+            Console.WriteLine("Please check the errors.\n");
+
             foreach (var kvp in errorsDict)
             {
                 var element = errorsDict[kvp.Key];

@@ -125,7 +125,7 @@ namespace ConsoleBattlefield.GameSetup
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    battlefield[i, j] =$"{i}{j}";
+                    battlefield[i, j] = Constants.OCEAN_AVATAR;
                 }
             }
 
