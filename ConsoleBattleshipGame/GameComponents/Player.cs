@@ -14,10 +14,12 @@ namespace ConsoleBattlefield.GameComponents
 
         private GameConstraint gameConstraint;
         private string[,] battlefield;
-        private List<MissileCoordinates> moves;
+        private Stack<MissileCoordinates> moves;
         private string name;
         private bool isValidPlayer;
         private List<string> errors;
+        public Dictionary<string, int> BattlefieldAnalyzer;
+        public bool IsVictor;
 
         public Player(IConstraintValidator constraintValidator, IBattlefieldSetter battlefieldSetter, GameConstraint gameConstraint)
         {
@@ -26,6 +28,7 @@ namespace ConsoleBattlefield.GameComponents
             this.gameConstraint = gameConstraint;
 
             ValidateConstraint(gameConstraint);
+            InitializeBattlefieldAnalyzer();
             name = gameConstraint.PlayerName;
         }
 
@@ -39,12 +42,37 @@ namespace ConsoleBattlefield.GameComponents
             if (isValidPlayer)
             {
                 battlefield = new string[10,10];
-                moves = new List<MissileCoordinates>();
+                moves = new Stack<MissileCoordinates>();
+
+                var missileArray = gameConstraint.MissileCoordinates.Split(',');
+
+                foreach (var missile in missileArray)
+                {
+                    var positionXY = missile.ToCharArray();
+                    moves.Push(new MissileCoordinates
+                    {
+                        PosX = Int32.Parse(positionXY[0].ToString()),
+                        PosY = Int32.Parse(positionXY[1].ToString())
+                    });
+                }
 
                 battlefield = battlefieldSetter.PrepareBattlefield(gameConstraint.Ships);
                 
                 
             }
+        }
+
+        /// <summary>
+        /// Dictionary to track elements on battlefield
+        /// </summary>
+        private void InitializeBattlefieldAnalyzer()
+        {
+            BattlefieldAnalyzer = new Dictionary<string, int>();
+            BattlefieldAnalyzer.Add(Constants.DESTROYER_AVATAR, 2);
+            BattlefieldAnalyzer.Add(Constants.BATTLESHIP_AVATAR, 4);
+            BattlefieldAnalyzer.Add(Constants.CARRIER_AVATAR, 5);
+            BattlefieldAnalyzer.Add(Constants.CRUISER_AVATAR, 3);
+            BattlefieldAnalyzer.Add(Constants.SUBMARINE_AVATAR, 3);
         }
 
         public bool IsValidPlayer
@@ -71,7 +99,7 @@ namespace ConsoleBattlefield.GameComponents
             }
         }
 
-        public IEnumerable<MissileCoordinates> Moves
+        public Stack<MissileCoordinates> Moves
         {
             get
             {

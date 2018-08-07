@@ -2,7 +2,6 @@
 using ConsoleBattlefield.GameComponents;
 using ConsoleBattlefield.GameSetup;
 using ConsoleBattlefield.Models;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +13,8 @@ namespace ConsoleBattlefield
         private readonly IGameConstraintsParser gameConstraintsParser;
         private readonly IConstraintValidator constraintValidator;
         private readonly IBattlefieldSetter battlefieldSetter;
+
+        bool gameOn = true;
 
         public BattleshipExecutor(IGameConstraintsParser gameConstraintsParser,
             IConstraintValidator constraintValidator,
@@ -33,7 +34,29 @@ namespace ConsoleBattlefield
 
             if (playerOne.IsValidPlayer && playerTwo.IsValidPlayer)
             {
-                //TODO
+                while (gameOn)
+                {
+                    gameOn = playerOne.FireWeapon(playerTwo);
+                    gameOn = playerTwo.FireWeapon(playerOne);
+                }
+
+                if (playerOne.IsVictor)
+                {
+                    Console.WriteLine($"{playerOne.Name} WINS...");
+                }
+                else if (playerTwo.IsVictor)
+                {
+                    Console.WriteLine($"{playerTwo.Name} WINS...");
+                }
+                else
+                {
+                    Console.WriteLine("Both players declared peace.");
+                }
+
+                PrintBattlefield(playerOne.Battlefield);
+                Console.WriteLine("#############################################################");
+                PrintBattlefield(playerTwo.Battlefield);
+
             }
             else
             {
@@ -43,6 +66,18 @@ namespace ConsoleBattlefield
                 PrintErrors(errorsDict);
             }
 
+        }
+
+        private void PrintBattlefield(string[,] battlefield)
+        {
+            for (int i = 0; i <= 9; i++)
+            {
+                for (int j = 0; j <= 9; j++)
+                {
+                    Console.Write(battlefield[i, j]);
+                }
+                Console.WriteLine("");
+            }
         }
 
         private Player SetupPlayer(GameConstraint constraints)
