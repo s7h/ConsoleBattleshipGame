@@ -16,6 +16,7 @@ namespace ConsoleBattlefield
             container.RegisterType<IConstraintReader, ConstraintReader>(); 
             container.RegisterType<IConstraintValidator, ConstraintValidator>();
             container.RegisterType<IBattlefieldSetter, BattlefieldSetter>();
+            container.RegisterType<IConsoleWriter, ConsoleWriter>();
 
             return container.Resolve<BattleshipExecutor>();
         }

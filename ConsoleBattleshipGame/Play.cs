@@ -14,13 +14,17 @@ namespace ConsoleBattlefield
                 var avatar = otherPlayer.Battlefield[move.PosX, move.PosY];
                 if (string.Equals(avatar, Constants.OCEAN_AVATAR) || string.Equals(avatar, Constants.DEBRIS))
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"{thisPlayer.Name} : It's a Miss.");
+                    Console.ResetColor();
                 }
                 else
                 {
                     otherPlayer.Battlefield[move.PosX, move.PosY] = Constants.DEBRIS;
                     otherPlayer.BattlefieldAnalyzer[avatar] -= 1;
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"{thisPlayer.Name} : It's a Hit!");
+                    Console.ResetColor();
                 }
                 var gameOn = AnalyzeBattlefield(otherPlayer);
 

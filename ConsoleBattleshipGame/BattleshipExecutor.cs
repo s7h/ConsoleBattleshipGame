@@ -13,16 +13,19 @@ namespace ConsoleBattlefield
         private readonly IGameConstraintsParser gameConstraintsParser;
         private readonly IConstraintValidator constraintValidator;
         private readonly IBattlefieldSetter battlefieldSetter;
+        private readonly IConsoleWriter consoleWriter;
 
         bool gameOn = true;
 
         public BattleshipExecutor(IGameConstraintsParser gameConstraintsParser,
             IConstraintValidator constraintValidator,
-            IBattlefieldSetter battlefieldSetter)
+            IBattlefieldSetter battlefieldSetter,
+            IConsoleWriter consoleWriter)
         {
             this.gameConstraintsParser = gameConstraintsParser;
             this.constraintValidator = constraintValidator;
             this.battlefieldSetter = battlefieldSetter;
+            this.consoleWriter = consoleWriter;
         }
 
         public void SetupAndStartTheGame(IEnumerable<string> filepaths)
@@ -53,9 +56,8 @@ namespace ConsoleBattlefield
                     Console.WriteLine("Both players declared peace.");
                 }
 
-                PrintBattlefield(playerOne.Battlefield);
-                Console.WriteLine("#############################################################");
-                PrintBattlefield(playerTwo.Battlefield);
+                PrintBattlefield(playerOne.Battlefield, playerOne.Name);
+                PrintBattlefield(playerTwo.Battlefield, playerTwo.Name);
 
             }
             else
@@ -68,13 +70,15 @@ namespace ConsoleBattlefield
 
         }
 
-        private void PrintBattlefield(string[,] battlefield)
+        private void PrintBattlefield(string[,] battlefield, string playerName)
         {
+            Console.WriteLine($"[################## {playerName} ##################]");
+
             for (int i = 0; i <= 9; i++)
             {
                 for (int j = 0; j <= 9; j++)
                 {
-                    Console.Write(battlefield[i, j]);
+                    consoleWriter.PrintAvatar(battlefield[i, j]);
                 }
                 Console.WriteLine("");
             }
