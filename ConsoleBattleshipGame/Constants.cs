@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace ConsoleBattlefield
 {
     public class Constants

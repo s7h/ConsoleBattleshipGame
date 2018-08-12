@@ -6,7 +6,6 @@ namespace ConsoleBattlefield.Models
     public class GameConstraint
     {
         public Ship[] Ships { get; set; }
-        public string MissileCoordinates { get; set; }
         public string PlayerName { get; set; }
     }
 }

@@ -5,7 +5,7 @@ namespace ConsoleBattlefield.ConstraintValidators
 {
     public interface IConstraintValidator
     {
-        IEnumerable<string> ValidateConstraints(GameConstraint gameConstraints);
+        IEnumerable<string> ValidateShipConstraints(GameConstraint gameConstraints);
         IEnumerable<string> ValidateMissile(string coordinates);
     }
 }

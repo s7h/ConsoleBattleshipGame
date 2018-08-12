@@ -36,26 +36,13 @@ namespace ConsoleBattlefield.GameComponents
         private void ValidateConstraint(GameConstraint gameConstraint)
         {
             errors = new List<string>();
-            errors.AddRange(constraintValidator.ValidateConstraints(gameConstraint).ToList());
+            errors.AddRange(constraintValidator.ValidateShipConstraints(gameConstraint).ToList());
 
             isValidPlayer = errors.Any() ? false : true;
 
             if (isValidPlayer)
             {
                 battlefield = new string[10,10];
-                moves = new Stack<MissileCoordinates>();
-
-                var missileArray = gameConstraint.MissileCoordinates.Split(',');
-
-                foreach (var missile in missileArray)
-                {
-                    var positionXY = missile.ToCharArray();
-                    moves.Push(new MissileCoordinates
-                    {
-                        PosX = Int32.Parse(positionXY[0].ToString()),
-                        PosY = Int32.Parse(positionXY[1].ToString())
-                    });
-                }
 
                 battlefield = battlefieldSetter.PrepareBattlefield(gameConstraint.Ships);
                 maskedBattlefield = battlefieldSetter.InitializeEmptyBattleField();

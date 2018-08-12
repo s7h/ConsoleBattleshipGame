@@ -47,17 +47,6 @@ namespace ConsoleBattlefield.GameSetup
                 }
             }
 
-            //Only for testing
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    for (int j = 0; j < 10; j++)
-            //    {
-            //        Console.Write(battlefield[i, j]);
-            //    }
-            //    Console.WriteLine("");
-            //}
-
-
             return errorMessages.Any() ? false : true;
         }
 

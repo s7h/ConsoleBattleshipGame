@@ -1,6 +1,5 @@
 ﻿using ConsoleBattlefield.GameComponents;
 using ConsoleBattlefield.GameSetup;
-using ConsoleBattlefield.Models;
 using System;
 using System.Linq;
 using System.Threading;
