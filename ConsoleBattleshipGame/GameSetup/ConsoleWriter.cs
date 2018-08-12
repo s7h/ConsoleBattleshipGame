@@ -26,7 +26,7 @@ namespace ConsoleBattlefield.GameSetup
                 {
                     PrintLine(error, ConsoleColor.White);
                 }
-                ReadCoordinates();
+                return ReadCoordinates();
             }
             else
             {
@@ -38,7 +38,6 @@ namespace ConsoleBattlefield.GameSetup
                     PosY = Int32.Parse(positionXY[1].ToString())
                 };
             }
-            return null;
         }
         public void PrintLine(string text, ConsoleColor foregroundColor, ConsoleColor backgroundColor = ConsoleColor.Black)
         {
