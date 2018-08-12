@@ -7,5 +7,6 @@ namespace ConsoleBattlefield.GameSetup
     {
         bool CanPlaceShipsOnTheBattlefield(Ship[] ships, out List<string> errorMessages);
         string[,] PrepareBattlefield(Ship[] ships);
+        string[,] InitializeEmptyBattleField();
     }
 }

@@ -73,5 +73,26 @@ namespace ConsoleBattlefield.ConstraintValidators
 
             return errorMessages;
         }
+
+        public IEnumerable<string> ValidateMissile(string coordinates)
+        {
+            var errorMessages = new List<string>();
+            
+            int coordinateInDigits;
+            if (coordinates.Length != 2)
+            {
+                errorMessages.Add($"{coordinates} : is not a correct coordinate. Use coordinates ranging from 00 to 99.");
+            }
+            if (!Int32.TryParse(coordinates, out coordinateInDigits))
+            {
+                errorMessages.Add($"{coordinates} : is not a correct coordinate. Use numeric digits ranging from 0 to 9 only.");
+            }
+            if (coordinateInDigits < 0 || coordinateInDigits > 99)
+            {
+                errorMessages.Add($"{coordinates} : is not a correct coordinate. Use coordinates ranging from 00 to 99.");
+            }
+
+            return errorMessages;
+        }
     }
 }

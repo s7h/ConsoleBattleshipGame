@@ -39,8 +39,8 @@ namespace ConsoleBattlefield
             {
                 while (gameOn)
                 {
-                    gameOn = playerOne.FireWeapon(playerTwo);
-                    gameOn = playerTwo.FireWeapon(playerOne);
+                    gameOn = playerOne.FireWeapon(playerTwo, consoleWriter);
+                    gameOn = playerTwo.FireWeapon(playerOne, consoleWriter);
                 }
 
                 if (playerOne.IsVictor)
@@ -72,7 +72,7 @@ namespace ConsoleBattlefield
 
         private void PrintBattlefield(string[,] battlefield, string playerName)
         {
-            Console.WriteLine($"[################## {playerName} ##################]");
+            Console.WriteLine($"\n[############### {playerName} ###############] \n");
 
             for (int i = 0; i <= 9; i++)
             {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleBattlefield.Models;
+using System;
 
 namespace ConsoleBattlefield.GameSetup
 {
@@ -6,5 +7,7 @@ namespace ConsoleBattlefield.GameSetup
     {
         void PrintLine(string text, ConsoleColor foregroundColor, ConsoleColor backgroundColor = ConsoleColor.Black);
         void PrintAvatar(string avatar);
+        MissileCoordinates ReadCoordinates();
+        void ClearScreen();
     }
 }

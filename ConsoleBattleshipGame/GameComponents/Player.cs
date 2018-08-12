@@ -14,6 +14,7 @@ namespace ConsoleBattlefield.GameComponents
 
         private GameConstraint gameConstraint;
         private string[,] battlefield;
+        private string[,] maskedBattlefield;
         private Stack<MissileCoordinates> moves;
         private string name;
         private bool isValidPlayer;
@@ -57,8 +58,7 @@ namespace ConsoleBattlefield.GameComponents
                 }
 
                 battlefield = battlefieldSetter.PrepareBattlefield(gameConstraint.Ships);
-                
-                
+                maskedBattlefield = battlefieldSetter.InitializeEmptyBattleField();
             }
         }
 
@@ -96,6 +96,14 @@ namespace ConsoleBattlefield.GameComponents
             get
             {
                 return battlefield;
+            }
+        }
+
+        public string[,] MaskedBattlefield
+        {
+            get
+            {
+                return maskedBattlefield;
             }
         }
 

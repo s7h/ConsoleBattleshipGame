@@ -1,26 +1,37 @@
 ﻿using ConsoleBattlefield.GameComponents;
+using ConsoleBattlefield.GameSetup;
+using ConsoleBattlefield.Models;
 using System;
 using System.Linq;
+using System.Threading;
 
 namespace ConsoleBattlefield
 {
     public static class Play
     {
-        public static bool FireWeapon(this Player thisPlayer, Player otherPlayer)
+        public static bool FireWeapon(this Player thisPlayer, Player otherPlayer, IConsoleWriter consoleWriter)
         {
-            if (thisPlayer.Moves.Count > 0 && !thisPlayer.IsVictor)
+            if (!thisPlayer.IsVictor)
             {
-                var move = thisPlayer.Moves.Pop();
-                var avatar = otherPlayer.Battlefield[move.PosX, move.PosY];
-                if (string.Equals(avatar, Constants.OCEAN_AVATAR) || string.Equals(avatar, Constants.DEBRIS))
+                consoleWriter.ClearScreen();
+
+                PrintEnemyBattlefield(otherPlayer, consoleWriter);
+                var coordinates = consoleWriter.ReadCoordinates();
+                
+                var avatar = otherPlayer.Battlefield[coordinates.PosX, coordinates.PosY];
+                if (string.Equals(avatar, Constants.OCEAN_AVATAR) 
+                    || string.Equals(avatar, Constants.DEBRIS)
+                    || string.Equals(avatar, Constants.HIT_ALREADY))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"{thisPlayer.Name} : It's a Miss.");
                     Console.ResetColor();
+                    otherPlayer.MaskedBattlefield[coordinates.PosX, coordinates.PosY] = Constants.HIT_ALREADY;
                 }
                 else
                 {
-                    otherPlayer.Battlefield[move.PosX, move.PosY] = Constants.DEBRIS;
+                    otherPlayer.Battlefield[coordinates.PosX, coordinates.PosY] = Constants.DEBRIS;
+                    otherPlayer.MaskedBattlefield[coordinates.PosX, coordinates.PosY] = Constants.DEBRIS;
                     otherPlayer.BattlefieldAnalyzer[avatar] -= 1;
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"{thisPlayer.Name} : It's a Hit!");
@@ -29,10 +40,26 @@ namespace ConsoleBattlefield
                 var gameOn = AnalyzeBattlefield(otherPlayer);
 
                 thisPlayer.IsVictor = gameOn ? false : true;
-
+                Thread.Sleep(1000);
                 return gameOn;
             }
             return false;
+        }
+
+        private static void PrintEnemyBattlefield(Player player, IConsoleWriter consoleWriter)
+        {
+            consoleWriter.PrintLine($"Enemy's Battlefield \n", ConsoleColor.White);
+
+            for (int i = 0; i <= 9; i++)
+            {
+                for (int j = 0; j <= 9; j++)
+                {
+                    consoleWriter.PrintAvatar(player.MaskedBattlefield[i, j]);
+                }
+                Console.WriteLine("");
+            }
+
+            consoleWriter.PrintLine($"{player.Name} turn: Enter Coordinates. \n", ConsoleColor.White);
         }
 
         private static bool AnalyzeBattlefield(Player otherPlayer)

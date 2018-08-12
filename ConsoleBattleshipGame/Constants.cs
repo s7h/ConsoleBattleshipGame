@@ -11,6 +11,7 @@ namespace ConsoleBattlefield
         public const string SUBMARINE_AVATAR = "[SUB]";
         public const string BATTLESHIP_AVATAR = "[BAT]";
         public const string DEBRIS = "[XXX]";
+        public const string HIT_ALREADY = "[/M/]";
         public const string DESTROYER = "DESTROYER";
         public const string CRUISER = "CRUISER";
         public const string CARRIER = "CARRIER";

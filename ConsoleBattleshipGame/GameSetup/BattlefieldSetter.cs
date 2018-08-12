@@ -118,7 +118,7 @@ namespace ConsoleBattlefield.GameSetup
             return string.Empty;
         }
 
-        private string[,] InitializeEmptyBattleField()
+        public string[,] InitializeEmptyBattleField()
         {
             var battlefield = new string[10, 10];
             for (int i = 0; i < 10; i++)
