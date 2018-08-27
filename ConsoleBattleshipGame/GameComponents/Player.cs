@@ -15,7 +15,6 @@ namespace ConsoleBattlefield.GameComponents
         private GameConstraint gameConstraint;
         private string[,] battlefield;
         private string[,] maskedBattlefield;
-        private Stack<MissileCoordinates> moves;
         private string name;
         private bool isValidPlayer;
         private List<string> errors;
@@ -91,14 +90,6 @@ namespace ConsoleBattlefield.GameComponents
             get
             {
                 return maskedBattlefield;
-            }
-        }
-
-        public Stack<MissileCoordinates> Moves
-        {
-            get
-            {
-                return moves;
             }
         }
 

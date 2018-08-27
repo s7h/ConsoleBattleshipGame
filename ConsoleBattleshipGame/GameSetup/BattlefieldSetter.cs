@@ -37,7 +37,7 @@ namespace ConsoleBattlefield.GameSetup
                         shipLength--;
                     }
                 }
-                catch (IndexOutOfRangeException iorEx)
+                catch (IndexOutOfRangeException)
                 {
                     errorMessages.Add($"Cannot deploy {ship.Type} outside the range of the battlefield. Try different Coordinate or change the alignment.");
                 }
